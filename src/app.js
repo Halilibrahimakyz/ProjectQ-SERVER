@@ -1,11 +1,9 @@
-const http = require('node:http');
-const hostname = '127.0.0.1';
-const port = 3000;
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
-});
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+const express = require("express");
+const _http = require('http');
+const config = require('./config');
+
+const app = express();
+const http = _http.createServer(app);
+
+config.initModules.forEach((init) => require(`./init/${init}`)(app, http));
+config.middlewareModules.forEach((mw) => require(`./middleware/${mw}`)(app, http));
