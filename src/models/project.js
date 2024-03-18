@@ -53,6 +53,10 @@ module.exports = (sequelize, DataTypes) => {
         projectTypesId: {
           type: DataTypes.INTEGER,
           allowNull: true,
+          references: {
+            model: 'project_types', // 'User' modeline referans verir
+            key: 'id', // 'User' modelindeki anahtar
+          },
           field: 'project_types_id',
         },
         ...commonTableColumns,

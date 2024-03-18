@@ -17,7 +17,7 @@ module.exports = async function (app, http) {
       
       const modelDefine = require(`../models/${model}`); // Modeli dinamik olarak yükle
       const eachModule = modelDefine(sequelize, DataTypes); // Modeli sequelize ve DataTypes ile başlat
-      await eachModule.sync({ alter: false }); // Modeli veritabanı ile senkronize et
+      await eachModule.sync({ alter: true }); // Modeli veritabanı ile senkronize et
       console.log('\x1b[32m%s\x1b[0m', 'model -------> ',model)
     });
   } catch (error) {
