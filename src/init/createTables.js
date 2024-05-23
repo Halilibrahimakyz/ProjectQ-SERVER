@@ -8,6 +8,7 @@ models.forEach(async (model) => {
   const eachModule = require(`../models/${model}.js`).default;
   await eachModule.sync({ alter: true });
 
+//  Important
 //   try {
 //     // ------------------------------- TG_UPD_DEL_<TABLE_NAME>  ------------------- TABLE_NAME ---------------------------------------------------------
 //     await sequelize.query(

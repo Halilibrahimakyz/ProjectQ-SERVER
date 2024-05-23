@@ -12,5 +12,6 @@ const router = express.Router();
 
 
 router.route('/').get(httpTest);
+router.route('/get').get(httpTest);
 
 module.exports = router;

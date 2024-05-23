@@ -1,4 +1,3 @@
-
 const dotenv = require('dotenv');
 
 module.exports = async () => {
@@ -9,5 +8,8 @@ module.exports = async () => {
     case 'development':
       dotenv.config({path: './src/config/config-dev.env'});
       break;
+    default:
+      throw new Error('NODE_ENV not set');
   }
+  console.log(`Environment: ${process.env.NODE_ENV}`);
 };

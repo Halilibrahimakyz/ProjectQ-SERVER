@@ -1,21 +1,40 @@
-const express = require("express");
-const _http = require('http');
+const express = require('express');
+const http = require('http');
 const config = require('./config');
-const isFunction = require('lodash');
+const isFunction = require('lodash/isFunction');
+const path = require('path');
+
 const app = express();
-const http = _http.createServer(app);
+const server = http.createServer(app);
 
-config.initModules.forEach((init) => require(`./init/${init}`)(app, http));
-
-  config.dbModules.forEach((init) => {
-    console.log("init", init);
-    // Correctly require the module without .default
-    const moduleFunc = require(`./init/${init}`);
+// Async module initialization function
+const initModule = async (relativePath, app, server) => {
+  try {
+    const absolutePath = path.resolve(__dirname, relativePath);
+    const moduleFunc = require(absolutePath);
     if (isFunction(moduleFunc)) {
-      moduleFunc(app, http);
+      await moduleFunc(app, server);
     } else {
-      console.error(`Module ${init} is not a function`);
+      console.error(`Module ${absolutePath} is not a function`);
     }
+  } catch (error) {
+    console.error(`Failed to initialize module ${relativePath}:`, error);
+  }
+};
+
+// Initialize all modules
+const initializeModules = async () => {
+  await Promise.all(config.initModules.map((init) => initModule(`./init/${init}`, app, server)));
+  await Promise.all(config.dbModules.map((init) => initModule(`./init/${init}`, app, server)));
+  await Promise.all(config.middlewareModules.map((mw) => initModule(`./middleware/${mw}`, app, server)));
+};
+
+initializeModules()
+  .then(() => {
+    console.log('All modules initialized successfully');
+  })
+  .catch((error) => {
+    console.error('Error initializing modules:', error);
   });
-  
-config.middlewareModules.forEach((mw) => require(`./middleware/${mw}`)(app, http));
+
+module.exports = { app, server };
