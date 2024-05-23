@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'users', // 'User' modeline referans verir
-            key: 'id', // 'User' modelindeki anahtar
+            model: 'users',
+            key: 'id',
           },
         field: 'user_id',
       },

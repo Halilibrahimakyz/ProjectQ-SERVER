@@ -1,6 +1,16 @@
-require('dotenv').config();
+import { config as dotenvConfig } from 'dotenv';
+dotenvConfig();
 
-module.exports = {
+interface Config {
+  initModules: string[];
+  dbModules: string[];
+  middlewareModules: string[];
+  apiRoutes: string[];
+  models: string[];
+  env: NodeJS.ProcessEnv;
+}
+
+const config: Config = {
   // Modules to initialize at the beginning of the application
   initModules: ['environment', 'listen'],
 
@@ -28,3 +38,5 @@ module.exports = {
   // Environment variables loaded from the .env file
   env: process.env,
 };
+
+export default config;

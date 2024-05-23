@@ -1,9 +1,6 @@
-// database.js
-const { Sequelize } = require('sequelize');
+import { Sequelize } from 'sequelize';
 
-// Export a function that creates the Sequelize instance
-module.exports = function() {
-  // Initialize Sequelize instance
+const initDatabase = (): Sequelize => {
   const sequelize = new Sequelize('postgres', 'postgres', '1234', {
     host: 'localhost',
     dialect: 'postgres',
@@ -13,3 +10,5 @@ module.exports = function() {
 
   return sequelize;
 };
+
+export default initDatabase;
