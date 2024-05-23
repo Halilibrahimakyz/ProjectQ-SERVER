@@ -1,8 +1,8 @@
 const { commonTableColumns } = require('../helpers/database'); // Gerekli yolu ayarlayın
 
 module.exports = (sequelize, DataTypes) => {
-  const donor = sequelize.define(
-    'donor',
+  const supporter = sequelize.define(
+    'supporter',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -43,10 +43,10 @@ module.exports = (sequelize, DataTypes) => {
       ...commonTableColumns,
     },
     {
-      tableName: 'donors', // Veritabanındaki tablo ismi
+      tableName: 'supporters', // Veritabanındaki tablo ismi
       timestamps: false, // createdAt ve updatedAt sütunlarını devre dışı bırak
     }
   );
 
-  return donor;
+  return supporter;
 };

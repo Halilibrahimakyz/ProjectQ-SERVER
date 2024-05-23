@@ -10,15 +10,13 @@ module.exports.apiRoutes = ['test'];
 
 module.exports.models = [
   'user',
-  'donor',
+  'supporter',
   'project',
-  'donorTransaction',
+  'supporterTransaction',
   'projectType',
   'status',
   'student',
   'studentTransaction',
-
 ];
-
 
 module.exports.env = process.env;

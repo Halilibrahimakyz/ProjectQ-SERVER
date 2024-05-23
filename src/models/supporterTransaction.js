@@ -1,8 +1,8 @@
 const { commonTableColumns } = require('../helpers/database'); // Adjust the path as necessary
 
 module.exports = (sequelize, DataTypes) => {
-    const donorTransaction = sequelize.define(
-      'donorTransaction',
+    const supporterTransaction = sequelize.define(
+      'supporterTransaction',
       {
         id: {
           type: DataTypes.INTEGER,
@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           field: 'id',
         },
-        donorId: {
+        supporterId: {
           type: DataTypes.INTEGER,
           allowNull: false,
           references: {
-            model: 'donors', // 'donor' modeline referans verir
-            key: 'id', // 'donor' modelindeki anahtar
+            model: 'supporters', // 'supporter' modeline referans verir
+            key: 'id', // 'supporter' modelindeki anahtar
           },
-          field: 'donor_id',
+          field: 'supporter_id',
         },
         projectId: {
           type: DataTypes.INTEGER,
@@ -46,11 +46,11 @@ module.exports = (sequelize, DataTypes) => {
         ...commonTableColumns,
       },
       {
-        tableName: 'donor_transactions', // Veritabanındaki tablo ismi
+        tableName: 'supporter_transactions', // Veritabanındaki tablo ismi
         timestamps: false, // createdAt ve updatedAt sütunlarını devre dışı bırak
       }
     );
   
-    return donorTransaction;
+    return supporterTransaction;
   };
   
