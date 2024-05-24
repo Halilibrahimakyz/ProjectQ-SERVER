@@ -1,4 +1,4 @@
-const { commonTableColumns } = require('../helpers/database'); // Adjust the path as necessary
+const { commonTableColumns } = require('./commonTableColumns'); 
 
 module.exports = (sequelize, DataTypes) => {
     const supporterTransaction = sequelize.define(

@@ -8,8 +8,9 @@ const initializeDatabase = async (app: Application, http: Server): Promise<void>
   try {
     const sequelize = initDatabase();
     await sequelize.authenticate();
+    console.log(' ');
     console.log('PostgreSQL Connection has been established successfully.');
-
+    console.log(' ');
     console.log('\x1b[32m%s\x1b[0m', '----------------------Models----------------------');
 
     const modelPromises = config.models.map(async (model: string) => {

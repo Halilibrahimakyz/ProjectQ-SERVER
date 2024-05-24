@@ -1,4 +1,4 @@
-const { commonTableColumns } = require('../helpers/database'); // Gerekli yolu ayarlayın
+const { commonTableColumns } = require('./commonTableColumns'); 
 
 module.exports = (sequelize, DataTypes) => {
     const status = sequelize.define(

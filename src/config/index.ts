@@ -15,7 +15,8 @@ const config: Config = {
   initModules: ['environment', 'listen'],
 
   // Modules related to setting up and connecting to the database
-  dbModules: ['database', 'dbConnect'],
+  // dbModules: ['database', 'dbConnect'],
+  dbModules: ['dbInit'],
 
   // Middleware modules to set up for the Express application
   middlewareModules: ['cors', 'express', 'routes'],
@@ -25,14 +26,14 @@ const config: Config = {
 
   // Models to be loaded and synchronized with the database
   models: [
-    'user', // Represents users in the database
-    'supporter', // Represents supporters in the database
-    'project', // Represents projects in the database
-    'supporterTransaction', // Represents transactions made by supporters
-    'projectType', // Represents different types of projects
-    'status', // Represents statuses for various entities
-    'student', // Represents students in the database
-    'studentTransaction', // Represents transactions made by students
+    // 'user', // Represents users in the database
+    // 'supporter', // Represents supporters in the database
+    // 'project', // Represents projects in the database
+    // 'supporterTransaction', // Represents transactions made by supporters
+    // 'projectType', // Represents different types of projects
+    // 'status', // Represents statuses for various entities
+    'students', // Represents students in the database
+    // 'studentTransaction', // Represents transactions made by students
   ],
 
   // Environment variables loaded from the .env file

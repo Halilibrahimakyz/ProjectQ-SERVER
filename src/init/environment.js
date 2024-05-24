@@ -11,5 +11,5 @@ module.exports = async () => {
     default:
       throw new Error('NODE_ENV not set');
   }
-  console.log(`Environment: ${process.env.NODE_ENV}`);
+  // console.log(`Environment: ${process.env.NODE_ENV}`);
 };

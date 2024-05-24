@@ -1,4 +1,4 @@
-const { commonTableColumns } = require('../helpers/database'); // Gerekiyorsa yolunu düzenleyin
+const { commonTableColumns } = require('./commonTableColumns'); // Gerekiyorsa yolunu düzenleyin
 
 module.exports = (sequelize, DataTypes) => {
     const project = sequelize.define(

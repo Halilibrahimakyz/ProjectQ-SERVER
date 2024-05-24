@@ -4,6 +4,7 @@ import path from 'path';
 import config from './config';
 import isFunction from 'lodash/isFunction';
 
+
 const app: Application = express();
 const server: Server = new Server(app);
 
@@ -25,6 +26,7 @@ const initModule = async (relativePath: string, app: Application, server: Server
 // Initialize all modules
 const initializeModules = async (): Promise<void> => {
   await Promise.all(config.initModules.map((init: string) => initModule(`./init/${init}`, app, server)));
+  // await Promise.all(config.dbModules.map((init: string) => initModule(`./init/${init}`, app, server)));
   await Promise.all(config.dbModules.map((init: string) => initModule(`./init/${init}`, app, server)));
   await Promise.all(config.middlewareModules.map((mw: string) => initModule(`./middleware/${mw}`, app, server)));
 };
@@ -37,4 +39,9 @@ initializeModules()
     console.error('Error initializing modules:', error);
   });
 
+  // AppDataSource.initialize()
+  //   .then(() => {
+  //       // here you can start to work with your database
+  //   })
+  //   .catch((error) => console.log(error))
 export { app, server };

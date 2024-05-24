@@ -1,4 +1,4 @@
-const { commonTableColumns } = require('../helpers/database');
+const { commonTableColumns } = require('./commonTableColumns'); 
 
 module.exports = (sequelize, DataTypes) => {
   const studentTransaction = sequelize.define(
