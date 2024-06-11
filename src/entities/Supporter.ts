@@ -19,8 +19,7 @@ export class Supporter extends CommonTableColumns {
   @Column({ type: 'boolean', default: false })
   wantsAnonymous: boolean;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, user => user.supporter)
   @JoinColumn({ name: 'user_id' })
   user: User;
-
 }

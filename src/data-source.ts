@@ -1,13 +1,17 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Student } from "./entity/Student"
-import { User } from "./entity/User"
-import { Supporter } from "./entity/Supporter"
-import { ProjectType } from "./entity/ProjectType"
-import { Project } from "./entity/Project"
-import { Status } from "./entity/Status"
-import { StudentTransaction } from "./entity/StudentTransaction"
-import { SupporterTransaction } from "./entity/SupporterTransaction"
+import { Student } from "./entities/Student"
+import { User } from "./entities/User"
+import { Supporter } from "./entities/Supporter"
+import { ProjectType } from "./entities/ProjectType"
+import { Project } from "./entities/Project"
+import { Status } from "./entities/Status"
+import { StudentTransaction } from "./entities/StudentTransaction"
+import { SupporterTransaction } from "./entities/SupporterTransaction"
+import { University } from "./entities/University"
+import { Domain } from "./entities/Domain"
+import {Interest} from "./entities/Interest"
+import { RefreshToken } from "./entities/RefreshToken"
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -18,7 +22,7 @@ export const AppDataSource = new DataSource({
   database: "postgres",
   synchronize: true,
   logging: false,
-  entities: [Student,User,Supporter,ProjectType,Project,Status,StudentTransaction,SupporterTransaction],
+  entities: [Student,User,Supporter,ProjectType,Project,Status,StudentTransaction,SupporterTransaction,University,Domain,Interest,RefreshToken],
   subscribers: [],
   migrations: [],
 })

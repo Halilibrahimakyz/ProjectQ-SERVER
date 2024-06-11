@@ -38,10 +38,5 @@ initializeModules()
   .catch((error) => {
     console.error('Error initializing modules:', error);
   });
-
-  // AppDataSource.initialize()
-  //   .then(() => {
-  //       // here you can start to work with your database
-  //   })
-  //   .catch((error) => console.log(error))
+  
 export { app, server };

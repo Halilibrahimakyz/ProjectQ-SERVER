@@ -19,10 +19,10 @@ const config: Config = {
   dbModules: ['dbInit'],
 
   // Middleware modules to set up for the Express application
-  middlewareModules: ['cors', 'express', 'routes'],
+  middlewareModules: ['cors','logging','express', 'routes'],
 
   // API routes that will be dynamically loaded
-  apiRoutes: ['test'],
+  apiRoutes: ['test','auth'],
 
   // Models to be loaded and synchronized with the database
   models: [

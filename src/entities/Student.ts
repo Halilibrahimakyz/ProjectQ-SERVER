@@ -12,9 +12,15 @@ export class Student extends CommonTableColumns {
 
   @Column({ nullable: true })
   class: string;
+  
+  @Column({ nullable: true })
+  department: string;
 
   @Column({ type: 'float', nullable: true })
   gpa: number;
+
+  @Column({ type: 'timestamp', nullable: true })
+  birthDate: Date;
 
   @Column({ type: 'boolean', nullable: true })
   verification: boolean;
@@ -22,8 +28,7 @@ export class Student extends CommonTableColumns {
   @Column({ type: 'text', nullable: true })
   goals: string;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, user => user.student)
   @JoinColumn({ name: 'user_id' })
   user: User;
-
 }

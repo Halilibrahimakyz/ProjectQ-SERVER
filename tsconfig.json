@@ -9,8 +9,9 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "types": ["jest", "node"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/tests/**/*.test.ts"],  // Test dosyalarını da dahil ediyoruz
   "exclude": ["node_modules"]
 }
