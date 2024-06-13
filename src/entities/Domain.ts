@@ -1,16 +1,14 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { University } from './University';
-import { CommonTableColumns } from './commonTableColumns';
 
 @Entity('domains')
-export class Domain extends CommonTableColumns {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Domain {
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  domain: string;
+    @Column()
+    domain: string;
 
-  @ManyToOne(() => University, university => university.domains)
-  @JoinColumn({ name: 'university_id' })
-  university: University;
+    @ManyToOne(() => University, university => university.domains)
+    university: University;
 }

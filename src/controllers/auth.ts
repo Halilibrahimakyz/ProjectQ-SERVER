@@ -88,7 +88,6 @@ export const httpSignUpStudent = async (req: Request, res: Response): Promise<vo
       gpa,
       goals,
       department,
-      birthDate,
       creatorId,
       modifierId,
     });

@@ -42,14 +42,14 @@ export class User extends CommonTableColumns {
   @Column({ length: 50, nullable: true })
   city: string;
 
-  @Column({ nullable: true })
-  age: number;
+  @Column({ type: 'date', nullable: true })
+  birthDate: Date;
 
   @Column({ type: 'text', nullable: true })
   bio: string;
 
   @Column({ nullable: true })
-  identificate: string;
+  identificate: boolean;
 
   @Column({ nullable: false })
   isActive: boolean;

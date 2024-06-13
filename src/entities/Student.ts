@@ -19,9 +19,6 @@ export class Student extends CommonTableColumns {
   @Column({ type: 'float', nullable: true })
   gpa: number;
 
-  @Column({ type: 'timestamp', nullable: true })
-  birthDate: Date;
-
   @Column({ type: 'boolean', nullable: true })
   verification: boolean;
 

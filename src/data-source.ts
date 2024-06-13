@@ -12,6 +12,8 @@ import { University } from "./entities/University"
 import { Domain } from "./entities/Domain"
 import {Interest} from "./entities/Interest"
 import { RefreshToken } from "./entities/RefreshToken"
+import {Country} from "./entities/Country"
+import {City} from "./entities/City"
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -22,7 +24,7 @@ export const AppDataSource = new DataSource({
   database: "postgres",
   synchronize: true,
   logging: false,
-  entities: [Student,User,Supporter,ProjectType,Project,Status,StudentTransaction,SupporterTransaction,University,Domain,Interest,RefreshToken],
+  entities: [Student,User,Supporter,ProjectType,Project,Status,StudentTransaction,SupporterTransaction,University,Domain,Interest,RefreshToken,Country,City],
   subscribers: [],
   migrations: [],
 })

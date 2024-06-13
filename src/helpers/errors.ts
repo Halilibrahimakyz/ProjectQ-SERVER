@@ -52,6 +52,13 @@ export const errors = Object.freeze({
     statusCode: 500,
     priority: errorPriorities.Fatal,
   },
+  USERNAME_TAKEN: {
+    code: 1004,
+    messageTR: 'Kullanıcı adı zaten alınmış',
+    messageEN: 'Username is already taken',
+    statusCode: 400,
+    priority: errorPriorities.Medium,
+  },
 } as const);
 
 export type ErrorCode = keyof typeof errors;
