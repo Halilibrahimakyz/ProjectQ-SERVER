@@ -59,6 +59,13 @@ export const errors = Object.freeze({
     statusCode: 400,
     priority: errorPriorities.Medium,
   },
+  INVALID_COUNTRY: {
+    code: 1004,
+    messageTR: 'Geçersiz ülke',
+    messageEN: 'Invalid country',
+    statusCode: 400,
+    priority: errorPriorities.Medium,
+  },
 } as const);
 
 export type ErrorCode = keyof typeof errors;

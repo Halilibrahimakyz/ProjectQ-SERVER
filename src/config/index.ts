@@ -22,7 +22,7 @@ const config: Config = {
   middlewareModules: ['cors','logging','express', 'routes'],
 
   // API routes that will be dynamically loaded
-  apiRoutes: ['test','auth','validate'],
+  apiRoutes: ['test','auth','validate','info'],
 
   // Models to be loaded and synchronized with the database
   models: [

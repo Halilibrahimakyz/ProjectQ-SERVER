@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { findUserByEmail, createUser, createStudent, createSupporter } from '../repositories/auth';
+import { findUserByEmail, createUser, createStudent, createSupporter,addInterestsToUser } from '../repositories/auth';
 import ErrorResponse from '../helpers/errorResponse';
 import { errors } from '../helpers/errors';
 import { hashPassword, comparePassword } from '../helpers/hash';
@@ -18,10 +18,10 @@ export const httpLoginStudent = async (req: Request, res: Response): Promise<voi
     const accessToken = generateAccessToken(user.id, user.userType);
     const refreshToken = await generateRefreshToken(user.id, user.userType);
 
-    res.status(200).json({ 
-      success: true, 
-      message: 'Login successful', 
-      data: { accessToken, refreshToken, user: { ...user, student: user.student } } 
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      data: { accessToken, refreshToken, user: { ...user, student: user.student } }
     });
   } catch (error) {
     ErrorResponse.handleErrorResponse(res, error);
@@ -41,10 +41,10 @@ export const httpLoginSupporter = async (req: Request, res: Response): Promise<v
     const accessToken = generateAccessToken(user.id, user.userType);
     const refreshToken = await generateRefreshToken(user.id, user.userType);
 
-    res.status(200).json({ 
-      success: true, 
-      message: 'Login successful', 
-      data: { accessToken, refreshToken, user: { ...user, supporter: user.supporter } } 
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      data: { accessToken, refreshToken, user: { ...user, supporter: user.supporter } }
     });
   } catch (error) {
     ErrorResponse.handleErrorResponse(res, error);
@@ -52,8 +52,34 @@ export const httpLoginSupporter = async (req: Request, res: Response): Promise<v
 };
 
 export const httpSignUpStudent = async (req: Request, res: Response): Promise<void> => {
-  console.log("istek geldi",req.body)
-  const { email, password, username, profilePicture, name, surname, idNumber, phoneNumber, gender, school, studentClass, country, city, department, gpa, goals, interests, birthDate, creatorId, modifierId } = req.body;
+  console.log("istek geldi", req.body)
+  const {
+    username,
+    name,
+    surname,
+    password,
+    email,
+    profilePicture,
+    idNumber,
+    phoneNumber,
+    gender,
+    country,
+    city,
+    birthDate,
+    bio,
+    identificate,
+    isActive,
+    userType,
+    interests,
+    school,
+    studentClass: studentClass,
+    department,
+    gpa,
+    verification,
+    goals,
+    creatorId,
+    modifierId
+  } = req.body;
   try {
     const existingUser = await findUserByEmail(email);
 
@@ -62,24 +88,29 @@ export const httpSignUpStudent = async (req: Request, res: Response): Promise<vo
     }
 
     const hashedPassword = await hashPassword(password);
-    const user = await createUser({
+    let user = await createUser({
       email,
       password: hashedPassword,
       username,
       name,
       surname,
-      userType: 'student',
       idNumber,
       phoneNumber,
       gender,
       country,
       profilePicture,
       city,
+      birthDate,
+      bio,
+      identificate,
       interests,
       isActive: true,
+      userType,
       creatorId,
-      modifierId,
+      modifierId
     });
+
+    user = await addInterestsToUser(user, interests);
 
     const student = await createStudent({
       user,
@@ -95,10 +126,12 @@ export const httpSignUpStudent = async (req: Request, res: Response): Promise<vo
     const accessToken = generateAccessToken(user.id, user.userType);
     const refreshToken = await generateRefreshToken(user.id, user.userType);
 
-    res.status(201).json({ 
-      success: true, 
-      message: 'User registered successfully', 
-      data: { user, student, accessToken, refreshToken } 
+    res.status(201).json({
+      success: true,
+      message: 'User registered successfully',
+      student, 
+      accessToken, 
+      refreshToken 
     });
   } catch (error) {
     ErrorResponse.handleErrorResponse(res, error);
@@ -143,10 +176,10 @@ export const httpSignUpSupporter = async (req: Request, res: Response): Promise<
     const accessToken = generateAccessToken(user.id, user.userType);
     const refreshToken = await generateRefreshToken(user.id, user.userType);
 
-    res.status(201).json({ 
-      success: true, 
-      message: 'User registered successfully', 
-      data: { user, supporter, accessToken, refreshToken } 
+    res.status(201).json({
+      success: true,
+      message: 'User registered successfully',
+      data: { user, supporter, accessToken, refreshToken }
     });
   } catch (error) {
     ErrorResponse.handleErrorResponse(res, error);
@@ -164,10 +197,10 @@ export const httpRefreshToken = async (req: Request, res: Response): Promise<voi
     const decoded = await verifyRefreshToken(refreshToken);
     const accessToken = generateAccessToken(decoded.id, decoded.role);
 
-    res.status(200).json({ 
-      success: true, 
-      message: 'Token refreshed successfully', 
-      data: { accessToken } 
+    res.status(200).json({
+      success: true,
+      message: 'Token refreshed successfully',
+      data: { accessToken }
     });
   } catch (error) {
     ErrorResponse.handleErrorResponse(res, error);
@@ -183,9 +216,9 @@ export const httpLogout = async (req: Request, res: Response): Promise<void> => 
     }
 
     await invalidateRefreshToken(refreshToken);
-    res.status(200).json({ 
-      success: true, 
-      message: 'Logged out successfully' 
+    res.status(200).json({
+      success: true,
+      message: 'Logged out successfully'
     });
   } catch (error) {
     ErrorResponse.handleErrorResponse(res, error);

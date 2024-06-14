@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { City } from './City';
 import { University } from './University';
 
-@Entity()
+@Entity('countriess')
 export class Country {
     @PrimaryGeneratedColumn()
     id: number;

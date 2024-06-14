@@ -2,6 +2,7 @@ import { AppDataSource } from '../data-source';
 import { User } from '../entities/User';
 import { Student } from '../entities/Student';
 import { Supporter } from '../entities/Supporter';
+import { Interest } from '../entities/Interest';
 
 export const findUserByEmail = async (email: string): Promise<User | undefined> => {
     const userRepository = AppDataSource.getRepository(User);
@@ -25,4 +26,18 @@ export const createSupporter = async (supporterData: Partial<Supporter>): Promis
     const supporterRepository = AppDataSource.getRepository(Supporter);
     const supporter = supporterRepository.create(supporterData);
     return await supporterRepository.save(supporter);
+};
+
+export const addInterestsToUser = async (user: User, interestNames: string[]): Promise<User> => {
+    const interestRepository = AppDataSource.getRepository(Interest);
+    const interests = await Promise.all(interestNames.map(async (interestName: string) => {
+        let interest = await interestRepository.findOne({ where: { name: interestName } });
+        if (!interest) {
+            interest = interestRepository.create({ name: interestName });
+            await interestRepository.save(interest);
+        }
+        return interest;
+    }));
+    user.interests = interests;
+    return await AppDataSource.getRepository(User).save(user);
 };

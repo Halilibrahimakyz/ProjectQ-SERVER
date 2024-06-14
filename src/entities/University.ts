@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'ty
 import { Country } from './Country';
 import { Domain } from './Domain';
 
-@Entity()
+@Entity('universities')
 export class University {
     @PrimaryGeneratedColumn()
     id: number;
