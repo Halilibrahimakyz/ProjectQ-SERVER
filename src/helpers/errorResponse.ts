@@ -27,11 +27,13 @@ class ErrorResponse extends Error {
     return alt;
   }
 
-  static handleErrorResponse(res: Response, error: any) {
+  static handleErrorResponse(res: Response, error: any,language: 'EN' | 'TR' = 'EN') {
     if (error instanceof ErrorResponse) {
       res.status(error.statusCode).json({ success: false, message: error.message, error: error.toJSON() });
     } else {
       console.error("Unhandled error: ", error);
+      const serverError = errors.SERVER_ERROR;
+      const message = language === 'TR' ? serverError.messageTR : serverError.messageEN;
       res.status(500).json({ success: false, error: errors.SERVER_ERROR });
     }
   }

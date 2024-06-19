@@ -1,18 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 import { User } from './User';
 import { CommonTableColumns } from './commonTableColumns';
+import { University } from './University';
 
 @Entity('students')
 export class Student extends CommonTableColumns {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  school: string;
+  @ManyToOne(() => University, university => university.students, { nullable: true })
+  @JoinColumn({ name: 'university_id' })
+  school: University;
 
   @Column({ nullable: true })
   class: string;
-  
+
   @Column({ nullable: true })
   department: string;
 

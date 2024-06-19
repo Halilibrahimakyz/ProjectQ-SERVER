@@ -18,8 +18,6 @@ export const findCitiesByCountry = async (countryCode: string) => {
     }));
   };
 
-
-
 export const findUniversitiesByCountry = async (countryCode: string) => {
   const universityRepository =  AppDataSource.getRepository(University);
   const universities = await universityRepository

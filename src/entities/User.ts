@@ -1,15 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToMany, JoinTable, ManyToOne, JoinColumn } from 'typeorm';
 import { CommonTableColumns } from './commonTableColumns';
 import { Student } from './Student';
 import { Supporter } from './Supporter';
 import { Interest } from './Interest';
+import { City } from './City';
 
 @Entity('users')
 export class User extends CommonTableColumns {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 100, unique: true  })
+  @Column({ length: 100, unique: true })
   username: string;
 
   @Column({ length: 100 })
@@ -33,14 +34,15 @@ export class User extends CommonTableColumns {
   @Column()
   phoneNumber: string;
 
-  @Column({ length: 10 })
+  @Column({ length: 250})
   gender: string;
 
-  @Column({ length: 50, nullable: true })
+  @Column({ length: 50 })
   country: string;
 
-  @Column({ length: 50, nullable: true })
-  city: string;
+  @ManyToOne(() => City, city => city.users, { nullable: true })
+  @JoinColumn({ name: 'city_id' })
+  city: City;
 
   @Column({ type: 'date', nullable: true })
   birthDate: Date;
