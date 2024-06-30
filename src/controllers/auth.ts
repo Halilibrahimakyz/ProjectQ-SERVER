@@ -350,7 +350,7 @@ export const httpRefreshToken = async (req: Request, res: Response): Promise<voi
     res.status(200).json({
       success: true,
       message: 'Token refreshed successfully',
-      data: { accessToken }
+      accessToken
     });
   } catch (error) {
     ErrorResponse.handleErrorResponse(res, error);

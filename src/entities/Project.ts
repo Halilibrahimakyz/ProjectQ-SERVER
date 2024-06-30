@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn,OneToMany } from 'typeorm';
 import { Student } from './Student';
 import { ProjectType } from './ProjectType'; 
 import { CommonTableColumns } from './commonTableColumns';
+import { ProjectPhoto } from './ProjectPhoto';
 
 @Entity('projects')
 export class Project extends CommonTableColumns {
@@ -34,4 +35,6 @@ export class Project extends CommonTableColumns {
   @JoinColumn({ name: 'project_types_id' })
   projectType: ProjectType;
 
+  @OneToMany(() => ProjectPhoto, photo => photo.project, { cascade: true })
+  photos: ProjectPhoto[];
 }
